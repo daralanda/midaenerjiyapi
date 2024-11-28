@@ -1,0 +1,53 @@
+﻿@using System.Configuration;
+@using Construction.WebUI.AppCode;
+@{
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+    string ProjectName = ConfigurationManager.AppSettings["ProjectName"];
+    MainCode mainCode = new MainCode(Domain, Request.RawUrl);
+    var data = mainCode.GetPageDetails();
+    ViewBag.Title = data.Title;
+    ViewBag.MetaKeywords = data.Keywords;
+    ViewBag.MetaDescription = data.Description;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="breadcumb-wrapper background-image" style="background-image: url('@Domain/Content/assets/img/bg/breadcumb-bg.jpg');">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">@data.Title</h1>
+            <ul class="breadcumb-menu">
+                <li>
+                    <a href="@Domain">Anasayfa</a>
+                </li>
+                <li>@data.Title</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<section class="th-blog-wrapper space-top space-extra2-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-7">
+                <div class="col-12">
+                    <img src="@data.ImageUrl" class="img-fluid mb-5-5 appear-animation mb-2" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="2000" alt="@data.Title" />
+                </div>
+                @Html.Raw(data.Content)
+
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <aside class="sidebar-area">
+                    <div class="widget widget_categories">
+                        <h3 class="widget_title">Hizmetlerimiz</h3>
+                        <ul>
+                            @Html.Raw(mainCode.GetServiceList())
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+  </div>
+</section>

@@ -1,0 +1,84 @@
+﻿@using System.Configuration;
+@using Construction.WebUI.AppCode;
+@{
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+    string ProjectName = ConfigurationManager.AppSettings["ProjectName"];
+    MainCode mainCode = new MainCode(Domain, Request.RawUrl);
+    var data = mainCode.GetPageDetails();
+    ViewBag.Title = data.Title;
+    ViewBag.MetaKeywords = data.Keywords;
+    ViewBag.MetaDescription = data.Description;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var images = mainCode.GetProjectImages(data.Id);
+}
+
+
+<section class="section section-height-3 border-0 m-0">
+    <div class="container position-relative pt-5 pb-5-5 mt-5 mb-5">
+        <div class="row justify-content-end pt-1 mt-lg-5">
+            <div class="col-7 col-md-5 position-relative">
+                <h1 class="position-absolute top-100 left-0 text-color-light font-weight-bold text-6 line-height-3 text-end mt-5-5">
+                    <span class="d-block position-relative z-index-1 pb-5 ps-lg-3 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="800">@data.Title</span>
+                    <span class="custom-svg-position-1 custom-svg-position-1-variation">
+                        <svg class="svg-fill-color-dark mt-1 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 859.45 88.44" xml:space="preserve" preserveAspectRatio="none">
+                        <polyline points="7.27,84.78 855.17,84.78 855.17,4.79 84.74,4.79 " />
+				                        </svg>
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container pb-5 pb-sm-0 my-5">
+    <div class="row align-items-center justify-content-center justify-content-sm-between flex-column flex-sm-row mb-5 mb-sm-0">
+        <div class="col-10 text-center text-sm-start mb-4 mb-sm-0">
+           
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="thumb-gallery-wrapper" data-thumbs-items="3">
+                <div class="thumb-gallery-detail owl-carousel owl-theme manual nav-inside nav-style-4 show-nav-hover nav-primary mb-3">
+                    @foreach (var item in images)
+                    {
+                        <div>
+                            <img src="@Domain@item.Url" class="img-fluid" alt="@data.Title">
+                        </div>
+                    }
+                </div>
+                <div class="thumb-gallery-thumbs owl-carousel owl-theme manual thumb-gallery-thumbs">
+
+
+                    @foreach (var item in images)
+                    {
+                        <div>
+                            <span class="d-block cur-pointer">
+                                <img alt="@data.Title" src="@Domain@item.Url" class="img-fluid">
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <h2 class="font-weight-bold text-10 line-height-1 text-color-dark mb-0 mb-sm-5-5">@data.Title</h2>
+            @Html.Raw(data.Content)
+        </div>
+    </div>
+</div>
+
+<div class="position-relative pb-5 d-sm-none d-xl-block">
+    <div class="position-absolute transform3dy-n50 left-0">
+        <div class="appear-animation" data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="1500" data-appear-animation-duration="1500ms">
+            <div class="custom-square-1 bg-primary mt-0 mb-5"></div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <script src="@Domain/Content/assets/js/examples/examples.gallery.js"></script>
+}

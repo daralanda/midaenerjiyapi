@@ -1,0 +1,19 @@
+﻿@using Construction.WebUI.AppCode;
+@{
+    MainCode mainCode = new MainCode();
+    MapXml map = new MapXml();
+    Layout = null;
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@mainCode.ProjectName Site Haritası</title>
+</head>
+<body>
+    @Html.Raw(map.GetSitemapDocument(Domain))
+</body>
+</html>

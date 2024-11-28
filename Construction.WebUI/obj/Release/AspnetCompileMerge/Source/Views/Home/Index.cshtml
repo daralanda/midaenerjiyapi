@@ -1,0 +1,69 @@
+﻿@using System.Configuration;
+@using Construction.WebUI.AppCode;
+@{
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+    string ProjectName = ConfigurationManager.AppSettings["ProjectName"];
+    MainCode mainCode = new MainCode(Domain, Request.RawUrl);
+    var data = mainCode.GetSpecialPage();
+    ViewBag.Title = data.Title;
+    ViewBag.MetaKeywords = data.Keywords;
+    ViewBag.MetaDescription = data.Description;
+}
+<div class="intro-section">
+    <div class="intro-section-slider">
+        <div class="container">
+            <div class="intro-slider-container slider-container-ratio mb-0">
+                <div class="intro-slider owl-carousel owl-simple owl-light" data-toggle="owl">
+                 @Html.Raw(mainCode.GetSlider())
+                </div>
+                <span class="slider-loader"></span>
+            </div>
+        </div>
+    </div>
+</div><!-- End .intro-section -->
+
+<div class="bg-light-2 pt-6 pb-5 mb-6 mb-lg-8">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 mb-3 mb-lg-0">
+                @Html.Raw(mainCode.Conversion("homepage-aboutus"))
+            </div><!-- End .col-lg-5 -->
+
+            <div class="col-lg-6 offset-lg-1">
+                <div class="about-images">
+                    <img src="@Domain/Content/assets/images/about/img-1.jpg" alt="" class="about-img-front">
+                    <img src="@Domain/Content/assets/images/about/img-2.jpg" alt="" class="about-img-back">
+                </div><!-- End .about-images -->
+            </div><!-- End .col-lg-6 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div>
+
+
+<div class="blog-posts">
+    <div class="container">
+        <h2 class="title-lg text-center mb-4">@mainCode.Conversion("homepage-blog-title")</h2><!-- End .title-lg text-center -->
+
+        <div class="owl-carousel owl-simple mb-4" data-toggle="owl" data-owl-options='{
+                            "nav": false, 
+                            "dots": true,
+                            "items": 3,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "520": {
+                                    "items":2
+                                },
+                                "992": {
+                                    "items":3
+                                }
+                            }
+                        }'>
+            @Html.Raw(mainCode.GetBlogList())
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,131 @@
+﻿@using Construction.WebUI.AppCode;
+@{
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+    DashboardMainCode mainCode = new DashboardMainCode(Domain);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<input type="hidden" id="Domain" value="@Domain" />
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-2">
+                <div class="col-sm-12" style=" text-align: right;">
+                    <a onclick='btnClick(this)' id="new" class="btn btn-primary insert text-white pull-right" data-toggle="modal" data-target="#mainModal"><i class="mdi mdi-plus-circle mr-1"></i> Yeni Banner Ekle</a>
+                </div>
+            </div>
+            <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatables">
+                <thead>
+                    <tr>
+                        <th>Resim</th>
+                        <th>Resim Adı</th>
+                        <th>Sıra No</th>
+                        <th width="95px"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </div> <!-- end card-body-->
+    </div> <!-- end card-->
+</div>
+
+@section Scripts{
+    <!-- JsGrid js -->
+    <link href="@mainCode.Domain/Content/Dashboard/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@mainCode.Domain/Content/Dashboard/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@mainCode.Domain/Content/Dashboard/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/jszip/jszip.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets/ControllerJs/Banner.js"></script>
+    <!-- Init js -->
+}
+
+<div class="modal" id="mainModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Banner</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Banner Adı</label>
+                            <input type="text" class="form-control" id="Title" placeholder="Banner Adı">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="ImgUrl">Resim</label>
+                            <div class="custom-file">
+                                <input type="file" onchange="FileUpload(this)" class="custom-file-input" id="ImgUrl">
+                                <label class="custom-file-label" for="ImgUrl" id="seciliresim"></label>
+                            </div>
+                            <div id="SilinecekResimler"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Sıra No</label>
+                            <input type="text" class="form-control" id="Queno" placeholder="Sıra Noı">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" onclick="PostData(this)" class="btn btn-primary" id="btnSumbit">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*modal Main*@
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="submodalTitle">Banner İçerik </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Yönlendirilecek Adres</label>
+                            <input type="text" class="form-control" id="PostUrl" placeholder="Yönlendirilecek Adres">
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" onclick="SubPostData()" class="btn btn-primary" id="subbtnSumbit">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+

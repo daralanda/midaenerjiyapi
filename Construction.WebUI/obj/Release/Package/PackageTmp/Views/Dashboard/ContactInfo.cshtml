@@ -1,0 +1,136 @@
+﻿@using Construction.WebUI.AppCode;
+@{
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+    DashboardMainCode mainCode = new DashboardMainCode(Domain);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<input type="hidden" id="Domain" value="@Domain" />
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-2">
+                <div class="col-sm-12" style=" text-align: right;">
+                    <a onclick='btnClick(this)' id="new" class="btn btn-primary insert text-white pull-right" data-toggle="modal" data-target="#mainModal"><i class="mdi mdi-plus-circle mr-1"></i> Yeni İletişim Bilgisi Ekle</a>
+                </div>
+            </div>
+            <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatables">
+                <thead>
+                    <tr>
+                        <th>İletişim Adı</th>
+                        <th>Telefon</th>
+                        <th>Email</th>
+                        <th>Durumu</th>
+                        <th>Varsayılan Mı</th>
+                        <th width="95px"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </div> <!-- end card-body-->
+    </div> <!-- end card-->
+</div>
+
+@section Scripts{
+    <!-- JsGrid js -->
+    <link href="@mainCode.Domain/Content/Dashboard/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@mainCode.Domain/Content/Dashboard/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@mainCode.Domain/Content/Dashboard/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/jszip/jszip.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets//libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="@mainCode.Domain/Content/Dashboard/assets/ControllerJs/ContactInfoList.js"></script>
+    <!-- Init js -->
+}
+
+<div class="modal" id="mainModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">İletişim Bilgisi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">İletişim Bilgis Adı</label>
+                            <input type="text" class="form-control" id="Name" placeholder="İletişim BilgisAdı">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Telefon</label>
+                            <input type="text" class="form-control" id="Phone" placeholder="Telefon">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Fax</label>
+                            <input type="text" class="form-control" id="Fax" placeholder="Fax">
+                        </div>
+                    </div>                   
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="category">Email</label>
+                            <input type="text" class="form-control" id="Email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="category">Adres</label>
+                            <input type="text" class="form-control" id="Address" placeholder="Adres">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="category">Map Frame</label>
+                            <input type="text" class="form-control" id="MapFrame" placeholder="MapFrame">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Durum</label>
+                            <select id="IsActive" class="form-control">
+                                <option value="false">Pasif</option>
+                                <option value="true">Aktif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Varsayılan Mı</label>
+                            <select id="IsDefault" class="form-control">
+                                <option value="false">Pasif</option>
+                                <option value="true">Aktif</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" onclick="PostData(this)" class="btn btn-primary" id="btnSumbit">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*modal Main*@
+
+
+

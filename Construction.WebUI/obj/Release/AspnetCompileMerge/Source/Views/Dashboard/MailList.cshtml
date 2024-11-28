@@ -1,0 +1,75 @@
+﻿@using Construction.WebUI.AppCode;
+@{
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+    DashboardMainCode mainCode = new DashboardMainCode(Domain);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<input type="hidden" id="Domain" value="@Domain" />
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title mb-4">Form grid layout</h4>
+
+            <form>
+                <div class="form-group">
+                    <label for="formrow-firstname-input">First name</label>
+                    <input type="text" class="form-control" id="formrow-firstname-input">
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formrow-email-input">Email</label>
+                            <input type="email" class="form-control" id="formrow-email-input">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formrow-password-input">Password</label>
+                            <input type="password" class="form-control" id="formrow-password-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="formrow-inputCity">City</label>
+                            <input type="text" class="form-control" id="formrow-inputCity">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="formrow-inputState">State</label>
+                            <select id="formrow-inputState" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="formrow-inputZip">Zip</label>
+                            <input type="text" class="form-control" id="formrow-inputZip">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="formrow-customCheck">
+                        <label class="custom-control-label" for="formrow-customCheck">Check me out</label>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary w-md">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,6 @@
+C:\Users\Pc\Desktop\Project\Construction\Construction\Construction.Infrastructure\bin\Debug\Construction.Infrastructure.dll
+C:\Users\Pc\Desktop\Project\Construction\Construction\Construction.Infrastructure\bin\Debug\Construction.Infrastructure.pdb
+C:\Users\Pc\Desktop\Project\Construction\Construction\Construction.Infrastructure\obj\Debug\Construction.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Pc\Desktop\Project\Construction\Construction\Construction.Infrastructure\obj\Debug\Construction.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Pc\Desktop\Project\Construction\Construction\Construction.Infrastructure\obj\Debug\Construction.Infrastructure.dll
+C:\Users\Pc\Desktop\Project\Construction\Construction\Construction.Infrastructure\obj\Debug\Construction.Infrastructure.pdb

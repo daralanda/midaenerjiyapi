@@ -1,0 +1,43 @@
+﻿@using System.Configuration;
+@using Construction.WebUI.AppCode;
+@{
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+    string ProjectName = ConfigurationManager.AppSettings["ProjectName"];
+    MainCode mainCode = new MainCode(Domain, Request.RawUrl);
+    var data = mainCode.GetPageDetails();
+    ViewBag.Title = data.Title;
+    ViewBag.MetaKeywords = data.Keywords;
+    ViewBag.MetaDescription = data.Description;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@Html.Raw(mainCode.GetBreadcrumb())
+
+
+<div class="container">
+    <div class="page-header page-header-big text-center" style="  background-image: url('@data.ImageUrl')">
+        <div class="page-title-shadow"><h1 class="page-title text-white">@data.Title</h1></div>
+    </div>
+</div>
+<div class="page-content pb-5">
+    <div class="container">
+        <div class="entry-container max-col-3" data-layout="fitRows">
+
+            @foreach (var item in mainCode.GetPageList())
+            {
+                <div class="entry-item lifestyle shopping col-sm-6 col-lg-4">
+                    <article class="entry entry-grid text-center">
+                        <figure class="entry-media"><a href="@item.SeoUrl"><img src="@item.ImageUrl" alt="@item.Title"></a></figure>
+                        <div class="entry-body">
+                            <h2 class="entry-title"><a href="@item.SeoUrl">@item.Title</a></h2>
+                            <div class="entry-content">
+                                <p>@item.Content</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

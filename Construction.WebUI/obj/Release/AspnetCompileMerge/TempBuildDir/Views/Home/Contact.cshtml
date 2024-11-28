@@ -1,0 +1,61 @@
+﻿@using System.Configuration;
+@using Construction.WebUI.AppCode;
+@{
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
+    string ProjectName = ConfigurationManager.AppSettings["ProjectName"];
+    MainCode mainCode = new MainCode(Domain, Request.RawUrl);
+    var data = mainCode.GetSpecialPage();
+    ViewBag.Title = data.Title;
+    ViewBag.MetaKeywords = data.Keywords;
+    ViewBag.MetaDescription = data.Description;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mainData = mainCode.GetContactInfos();
+}
+@Html.Raw(mainCode.GetBreadcrumb())
+
+
+<div class="container">
+    <div class="page-header text-center contact-page-header mb-5" >
+        <h1 class="page-title text-black">@ViewBag.Title</h1>
+    </div><!-- End .page-header -->
+</div><!-- End .container -->
+
+<div class="page-content pb-0">
+    <div class="container">
+        <div class="stores mb-4 mb-lg-5">
+            <h2 class="title text-center mb-3">
+                @Html.Raw(mainCode.Conversion("contactpage-store"))
+            </h2>
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    @foreach (var item in mainData)
+                    {
+                        <div class="store">
+                            <div class="row">
+                                <div class="col-sm-5 col-xl-6">
+                                    @Html.Raw(item.MapFrame)
+                                </div>
+                                <div class="col-sm-7 col-xl-6">
+                                    <div class="store-content p-2">
+                                        <h2 class="store-title">@item.Name</h2>
+                                        <hr />
+                                        <address>@item.Address</address>
+                                        <div><a href="tel:#@item.Phone">@item.Phone</a></div>
+                                        <div><a href="tel:#@item.Fax">@item.Fax</a></div>
+                                        <div><a href="mailto:@item.Email">@item.Email</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
