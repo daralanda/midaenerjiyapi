@@ -9,84 +9,19 @@
     ViewBag.MetaKeywords = data.Keywords;
     ViewBag.MetaDescription = data.Description;
 }
+<div class="fs_controls">
 
-<div class="th-hero-wrapper hero-8" id="hero">
-    <div class="hero-slider-8 th-carousel" data-fade="true" data-slide-show="1" data-md-slide-show="1" data-adaptive-height="true">
-        @Html.Raw(mainCode.GetSlider())
+    <div class="title_wrapper">
+        <a href="fs_link" class="fs_link"><h2 class="fs_title"></h2></a>
+        <span class="fs_descr"></span>
+    </div>
+    <div class="fs_controls_append">
+        <a href="javascript:void(0)" class="close_controls"></a>
     </div>
 </div>
-<section class="overflow-hidden p-2 mt-5" data-bg-src="@Domain/Content/assets/img/update1/bg/service_bg_1.png" id="service-sec">
-    <div class="container">
-        <div class="row justify-content-lg-between align-items-end">
-            <div class="col-lg-7 mb-n2 mb-lg-0">
-                <div class="title-area">
-                    <h2 class="sec-title">
-                        Hizmetlerimiz
-                    </h2>
-                </div>
-            </div>
+<a href="javascript:void(0)" class="close_controls show_me_always"></a>
 
-        </div>
-        <div class="row slider-shadow th-carousel dot-style3" data-slide-show="4" data-lg-slide-show="3" data-md-slide-show="2" data-sm-slide-show="1" data-dots="true" data-xl-dots="true" data-ml-dots="true" data-lg-dots="true" data-md-dots="true">
-            @Html.Raw(mainCode.GetServicesList())
-        </div>
-    </div>
-</section>
-<section class="project-sec p-2" data-pos-space=".process-sec">
-    <div data-bg-src="assets/img/update1/bg/bg_pattern_6.png">
-        <div class="container">
-            <div class="">
-                <div class="row justify-content-lg-between align-items-end">
-                    <div class="col-lg-7 mb-n2 mb-lg-0">
-                        <div class="title-area">
-                            <h2 class="sec-title">Projelerimiz</h2>
-                        </div>
-                    </div>
-                   
-                </div>
-                <div class="row slider-shadow th-carousel" id="projectSlide1" data-slide-show="3" data-md-slide-show="2" data-sm-slide-show="1">
-
-                    @Html.Raw(mainCode.GetHomeProject())
-
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<section class="p-2" data-bg-src="@Domain/Content/assets/img/update1/bg/blog_bg_2.png" id="blog-sec">
-    <div class="container">
-        <div class="title-area text-center">
-            <h2 class="sec-title">Bizden Haberler</h2>
-        </div>
-        <div class="row slider-shadow th-carousel" data-slide-show="3" data-lg-slide-show="2" data-md-slide-show="2" data-sm-slide-show="1">
-            @Html.Raw(mainCode.GetHomeBlogs())
-        </div>
-    </div>
-</section>
-<div class="overflow-hidden p-2 bg-whitesmoke mb-3">
-    <div class="container">
-        <div class="brand-box-wrap">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row th-carousel" id="brandSlide" data-slide-show="5" data-lg-slide-show="4" data-md-slide-show="3" data-sm-slide-show="3" data-xs-slide-show="3">
-
-                        @Html.Raw(mainCode.GetHomeBanners())
-
-                       
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
+@section Scripts{
+    <script type="text/javascript" src="@Domain/Content/assets/page/index.js"></script>
+    <script type="text/javascript" src="@Domain/Content/assets/js/fs_gallery.js"></script>
+}

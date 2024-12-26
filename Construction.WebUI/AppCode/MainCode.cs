@@ -62,7 +62,7 @@ namespace Construction.WebUI.AppCode
                 var data = db.Languages.Where(p => p.IsActive).OrderBy(p => p.Queno).ToList();
                 if (data.Count > 0)
                 {
-                    result = "<button class='dropdown-toggle btn' type='button' data-bs-toggle='dropdown' aria-expanded='false'>" + data.Where(p => p.LanguageId == _languageId).FirstOrDefault().LanguageName + "</button><ul class='dropdown-menu'>";
+                    result = "<button class='menu-item-has-children' type='button' data-bs-toggle='dropdown' aria-expanded='false'>" + data.Where(p => p.LanguageId == _languageId).FirstOrDefault().LanguageName + "</button><ul class='sub-menu'>";
                 }
                 foreach (var item in data)
                 {
@@ -87,7 +87,7 @@ namespace Construction.WebUI.AppCode
                     var sub = result.Where(p => p.Category.MainCategoryId == item.CategoryId && !p.Category.IsBlog && p.Category.CategoryType != 5).ToList();
                     if (sub.Count>0)
                     {
-                        snc += "<li class='dropdown'><a href='#' class='nav-link dropdown-toggle'>" + item.Title + "</a><ul class='dropdown-menu'>";
+                        snc += "<li class='menu-item-has-children'><a href='#' >" + item.Title + "</a><ul class='sub-menu'>";
                         foreach (var subitem in sub)
                         {
                             snc += "<li><a href='" + _domain + subitem.SeoUrl + "'  class='dropdown-item'>" + subitem.Title + "</a></li>";
@@ -172,9 +172,9 @@ namespace Construction.WebUI.AppCode
                 string resultString = string.Empty;
                 foreach (var item in result)
                 {
-                    resultString += "<a href='"+item.PostUrl+"' class='social-icon' title='"+item.SocialMediaName+"' target='_blank'><i class='"+item.Icon+ "'></i></a>";
+                    resultString += "<li><a href='"+item.PostUrl+"' class='"+item.Icon+ "' title='"+item.SocialMediaName+"' target='_blank'></a></li>";
                 }
-                return resultString;
+                return string.Format(@"<ul class='socials_list'>{0}</ul>",resultString);
             }
         }
         public SecurityObject FindUrl(string url)
@@ -431,6 +431,9 @@ namespace Construction.WebUI.AppCode
                 data.Title = main.Title;
                 data.Description = main.Description;
                 data.Id = main.CategoryId;
+                data.Location = main.Category.Location;
+                data.Meters = main.Category.Meters;
+                data.ProjectDate = main.Category.ProjectDate;
                 return data;
             }
         }
@@ -795,29 +798,34 @@ namespace Construction.WebUI.AppCode
 						p.SeoUrl,
 						p.CategoryId,
 						p.Category.Queno,
-                        p.Category.Galleries.FirstOrDefault().Url
+                        p.Category.Galleries.FirstOrDefault().Url,
+                        p.Category.Meters,
+                        p.Category.Location,
+                        p.Category.ProjectDate
 					}).OrderBy(p => p.Queno).ToList();
 
                     foreach (var item in projects)
                     {
 
-                        result += string.Format(@"<div class='col-sm-6 col-md-4 isotope-item pre-construction'>
-                                                    <div class='portfolio-item appear-animation' data-appear-animation='fadeInUpShorterPlus' data-appear-animation-delay='1200'>
-                                                        <div class='thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-centered-icons mb-3-5'>
-                                                            <div class='thumb-info-wrapper'>
-                                                                <img src='{2}' class='img-fluid' alt='{0}'>
-                                                                <div class='thumb-info-action'>
-                                                                    <a href='{1}'>
-                                                                        <div class='thumb-info-action-icon thumb-info-action-icon-light'><i class='fas fa-plus text-dark'></i></div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h2 class='font-weight-bold text-5-5 line-height-3'>
-                                                            <a href='{1}' class='text-color-dark text-color-hover-primary text-decoration-none'>{0}</a>
-                                                        </h2>
-                                                    </div>
-                                                </div>", item.Title, item.SeoUrl, item.Url);
+                        result += string.Format(@"  <div class='blogpost_preview_fw element'>
+                                                                          <div class='fw-portPreview'>
+                                                                              <div class='img_block wrapped_img fs_port_item'>
+                                                                                  <a class='featured_ico_link' href='{1}'>
+                                                                                      <img alt='{0}' src='{2}' />
+                                                                                  </a>
+                                                                                  <div class='bottom_box'>
+                                                                                      <div class='bc_content'>
+                                                                                          <h5 class='bc_title'><a href='{1}'>{0}</a></h5>
+                                                                                          <div class='featured_items_meta'>
+                                                                                              <span>{5}</span>
+                                                                                              <span>{4}</span>
+                                                                                              <span>{3}</span>
+                                                                                          </div>
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>", item.Title, item.SeoUrl, item.Url,item.Meters,item.ProjectDate,item.Location);
                     }
 				}
             }
@@ -895,5 +903,10 @@ namespace Construction.WebUI.AppCode
 			}
 			return result;
 		}
-	}
+
+        public static implicit operator MainCode(DashboardMainCode v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

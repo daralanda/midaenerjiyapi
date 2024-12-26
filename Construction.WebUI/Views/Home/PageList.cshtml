@@ -9,51 +9,41 @@
     ViewBag.MetaKeywords = data.Keywords;
     ViewBag.MetaDescription = data.Description;
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    var models = mainCode.GetPageList();
 }
 
-<section class="section section-height-3 border-0 m-0">
-    <div class="container position-relative pt-5 pb-5-5 mt-5 mb-5">
-        <div class="row justify-content-end pt-1 mt-lg-5">
-            <div class="col-7 col-md-5 position-relative">
-                <h1 class="position-absolute top-100 left-0 text-color-light font-weight-bold text-6 line-height-3 text-end mt-5-5">
-                    <span class="d-block position-relative z-index-1 pb-5 ps-lg-3 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="800">@data.Title</span>
-                    <span class="custom-svg-position-1 custom-svg-position-1-variation">
-                        <svg class="svg-fill-color-dark mt-1 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 859.45 88.44" xml:space="preserve" preserveAspectRatio="none">
-                        <polyline points="7.27,84.78 855.17,84.78 855.17,4.79 84.74,4.79 " />
-				                        </svg>
-                    </span>
-                </h1>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section>
-    <div class="container pt-4 pb-5 my-5">
-        <div class="row">
-            @*<div class="col-lg-12 mb-5 mb-lg-0 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1600"> </div>*@
-
-                @foreach (var item in mainCode.GetPageList())
-                {
-                    <article class="mb-5 col-lg-6">
-                        <div class="card bg-transparent border-0 custom-border-radius-1">
-                            <div class="card-body p-0 z-index-1">
-                                <a href="@item.SeoUrl" data-cursor-effect-hover="plus">
-                                    <img class="card-img-top custom-border-radius-1 mb-2" src="@item.ImageUrl" alt="@item.Title">
-                                </a>
-                                <div class="card-body p-0">
-                                    <h4 class="card-title text-5 font-weight-bold pb-1 mb-2"><a class="text-color-dark text-color-hover-primary text-decoration-none" href="@item.SeoUrl">@item.Title</a></h4>
-                                    <p class="card-text mb-2">@(item.Content.Length>150?Html.Raw(item.Content.Substring(0,150)):Html.Raw(item.Content))</p>
+<div class="site_wrapper">
+    <div class="main_wrapper">
+        <div class="content_wrapper">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in models)
+                    {
+                        <div class="col-md-6">
+                            <div class="blog_post_preview preview_type2">
+                                <div class="blog_content">
+                                    <div class="preview_top">
+                                        <div class="preview_title">
+                                            <h4 class="blogpost_title"><a href="@item.SeoUrl">@item.Title</a></h4>
+                                        </div>
+                                    </div>
+                                    <div class="pf_output_container">
+                                        <div class="slider-wrapper theme-default ">
+                                            <div class="nivoSlider">
+                                                <a href="@item.SeoUrl"> <img src="@item.ImageUrl" alt="@item.Title" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <article class="contentarea">
+                                        @Html.Raw(item.Content)
+                                        <br class="clear">
+                                    </article>
                                 </div>
                             </div>
                         </div>
-                    </article>
-                }
-                <ul class="custom-pagination-style-1 pagination pagination-rounded pagination-md justify-content-center">
-
-                </ul>
-           
+                    }
+                </div>
+            </div>
         </div>
     </div>
-</section>
+</div>

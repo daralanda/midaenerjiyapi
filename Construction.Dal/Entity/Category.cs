@@ -22,8 +22,10 @@ namespace Construction.Dal.Entity
 		public int Queno { get; set; }
 		public string Title { get; set; }
 		public bool IsBlog { get; set; }
-
-		public List<UrlRecord> UrlRecords { get; set; }
+        public string Location { get; set; }
+        public string Meters { get; set; }
+        public string ProjectDate { get; set; }
+        public List<UrlRecord> UrlRecords { get; set; }
 		public List<Gallery> Galleries { get; set; }
 
 	}

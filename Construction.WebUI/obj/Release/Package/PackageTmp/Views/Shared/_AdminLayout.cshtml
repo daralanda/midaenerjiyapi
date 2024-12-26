@@ -21,6 +21,7 @@
 <head>
     <meta charset="utf-8" />
     <title>@ProjectName | @ViewBag.Title </title>
+    <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="@Domain/Content/dashboard/assets/images/favicon.ico">
     <link href="@Domain/Content/Dashboard/assets/libs/summernote/summernote-bs4.min.css" rel="stylesheet" type="text/css" />
@@ -35,7 +36,7 @@
             <div class="navbar-header">
                 <div class="d-flex">
                     <div class="navbar-brand-box">
-                        <a href="@Domain/Dashboard" class="logo logo-dark">
+                        <a href="@Domain/Dashboard/" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="@Domain/Content/dashboard/assets/images/logo.svg" alt="" height="22">
                             </span>
@@ -43,7 +44,7 @@
                                 <img src="@Domain/Content/dashboard/assets/images/logo-dark.png" alt="" height="17">
                             </span>
                         </a>
-                        <a href="@Domain/Dashboard" class="logo logo-light">
+                        <a href="@Domain/Dashboard/" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="@Domain/Content/dashboard/assets/images/logo-light.svg" alt="" height="22">
                             </span>
@@ -70,9 +71,8 @@
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="@Domain/dashboard/profile"><i class="bx bx-user font-size-16 align-middle mr-1"></i> Benim Sayfam</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="" @Domain /giris-yap"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Güvenli Çıkış</a>
+                            <a class="dropdown-item text-danger" href="@Domain/giris-yap.html"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Güvenli Çıkış</a>
                         </div>
                     </div>
                 </div>

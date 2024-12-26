@@ -1,0 +1,12 @@
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\bin\Release\Construction.Dal.dll.config
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\bin\Release\Construction.Dal.dll
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\bin\Release\Construction.Dal.pdb
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\bin\Release\EntityFramework.dll
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\bin\Release\EntityFramework.xml
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\obj\Release\Construction.Dal.csproj.AssemblyReference.cache
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\obj\Release\Construction.Dal.csproj.CoreCompileInputs.cache
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\obj\Release\Construc.10948B1A.Up2Date
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\obj\Release\Construction.Dal.dll
+C:\Users\Pc\Desktop\Project\midaenerjiyapi\Construction.Dal\obj\Release\Construction.Dal.pdb

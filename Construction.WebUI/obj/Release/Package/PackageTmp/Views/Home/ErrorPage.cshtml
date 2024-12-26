@@ -1,8 +1,17 @@
 ﻿
 @{
-    ViewBag.Title = "ErrorPage";
+    ViewBag.Title = "Hata Sayfası";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string Domain = Request.Url.Scheme + "://" + Request.Url.Authority;
 }
 
-<h2>ErrorPage</h2>
-
+<div class="error-content text-center" style="background-image: url(assets/images/backgrounds/error-bg.jpg)">
+    <div class="container">
+        <h1 class="error-title">Error 404</h1><!-- End .error-title -->
+        <p>Beklenmedik hata ile karşılaşıldı.</p>
+        <a href="@Domain" class="btn btn-outline-primary-2 btn-minwidth-lg">
+            <span>Anasayfaya Geri Dönmek İçin Tıklayınız</span>
+            <i class="icon-long-arrow-right"></i>
+        </a>
+    </div><!-- End .container -->
+</div>

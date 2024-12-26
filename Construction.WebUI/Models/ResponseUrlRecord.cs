@@ -1,10 +1,4 @@
-﻿using Construction.Dal.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Construction.WebUI.Models
+﻿namespace Construction.WebUI.Models
 {
     public class ResponseUrlRecord
     {
@@ -15,5 +9,8 @@ namespace Construction.WebUI.Models
         public string Keywords { get; set; }
         public string Description { get; set; }
         public string SeoUrl { get; set; }
+        public string Location { get; set; }
+        public string Meters { get; set; }
+        public string ProjectDate { get; set; }
     }
 }

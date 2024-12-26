@@ -64,7 +64,7 @@
                                     <div class="form-group">
                                         <label for="userpassword">Parola</label>
                                         @*<input type="password" class="form-control" id="userpassword" placeholder="Parola">*@
-                                        @Html.TextBoxFor(f => f.Password, new { @class = "form-control", title = "Parolanızı giriniz.", @Value = @ViewBag.Password })
+                                        @Html.TextBoxFor(f => f.Password, new { @class = "form-control", title = "Parolanızı giriniz.", @type = "password", @Value = @ViewBag.Password })
 
                                     </div>
                                     <div class="mt-3">

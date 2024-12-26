@@ -5,6 +5,7 @@ var Domain = document.getElementById("Domain").value;
 var newFile = null;
 var MainCategory = [];
 var Language = [];
+var CategoryData = [];
 $(document).ready(function () {
     PageLoad();
 });
@@ -12,7 +13,8 @@ var GalleryMain = {
     GalleryId:0,
     Url:"",
     Title:"",
-    CreateDate:""
+    CreateDate: "",
+    CategoryId:0
 }
 function PageLoad() {
     $.ajax({
@@ -24,6 +26,7 @@ function PageLoad() {
             if (data.state) {
                 MainCategory = data.main;
                 Language = data.lang;
+                CategoryData = data.cat;
                 var columns = [
                     {
                         "data": "Url",
@@ -32,7 +35,6 @@ function PageLoad() {
                         }
                     },
                     { "data": "Title" },
-                    { "data": "CreateDate" },
                     {
                         "data": "GalleryId",
                         render: function (data) {
@@ -53,8 +55,13 @@ function PageLoad() {
                     }
                 ];
                 DatatablesLoad("datatables", data.data, columns);
-               
+                category.innerHTML = "";
+                category.innerHTML = "<option value='0'> Lütfen Kategori Seçiniz..</option>";
+                data.cat.forEach(function (element) {
+                    category.innerHTML += "<option value='" + element.id + "'>" + element.text + "</option>";
+                });
             }
+
         }
     });
 
@@ -74,21 +81,27 @@ function btnClick(obj) {
 }
 function FormClean() {
     document.getElementById("Title").value = "";
+    document.getElementById("MainCategoryId").value =null;
     newFile = null;
     document.getElementById("SilinecekResimler").innerHTML = "";
 }
 function Find(id) {
     GalleryMain.GalleryId = id;
+   
     $.ajax({
         url: '/api/FindGallery',
         type: 'Post',
         dataType: 'Json',
-        data: JSON.stringify(categories),
+        data: JSON.stringify(GalleryMain),
         contentType: 'application/json',
         success: function (data) {
             if (data.state) {
                 document.getElementById("Title").value = data.data.Title;
                 newFile = data.data.Url;
+                GalleryMain.CategoryId = data.data.CategoryId;
+                GalleryMain.Title = data.data.Title;
+                GalleryMain.Url = data.data.Url;
+                document.getElementById("MainCategoryId").value = data.data.CategoryId;
                 document.getElementById("SilinecekResimler").innerHTML = '<img src="' + data.data.Url + '" class="' + data.data.Url + '" width="80" height="auto"/> <a onclick="DeleteSingleFile(this)" id="' + data.data.ImageUrl + '" > Sil </a>';
             }
         }
@@ -99,6 +112,7 @@ function Find(id) {
 
 function PostData(obj) {
     GalleryMain.Title = document.getElementById("Title").value;
+    GalleryMain.CategoryId = document.getElementById("MainCategoryId").value;
     if (obj.innerHTML == "Galeri Güncelle") {
         if (Imgdata.length > 0) {
             DeleteSingleFile('<img src="' + newFile + '" class="' + newFile + '" width="80" height="auto"/> <a onclick="DeleteSingleFile(this)" id="' + newFile + '" > Sil </a>');

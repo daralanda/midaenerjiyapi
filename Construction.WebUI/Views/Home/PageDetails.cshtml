@@ -9,48 +9,26 @@
     ViewBag.MetaKeywords = data.Keywords;
     ViewBag.MetaDescription = data.Description;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var bred = mainCode.GetBreadcrumb();
 }
 
+<div class="breadcrumb-spc">
+    @Html.Raw(bred)
+    <img src="@data.ImageUrl" class="breadcrumb-spc-img" />
+</div>
 
-<section class="section section-height-3 border-0 m-0">
-    <div class="container position-relative pt-5 pb-5-5 mt-5 mb-5">
-        <div class="row justify-content-end pt-1 mt-lg-5">
-            <div class="col-7 col-md-5 position-relative">
-                <h1 class="position-absolute top-100 left-0 text-color-light font-weight-bold text-6 line-height-3 text-end mt-5-5">
-                    <span class="d-block position-relative z-index-1 pb-5 ps-lg-3 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="800">@data.Title</span>
-                    <span class="custom-svg-position-1 custom-svg-position-1-variation">
-                        <svg class="svg-fill-color-dark mt-1 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 859.45 88.44" xml:space="preserve" preserveAspectRatio="none">
-                        <polyline points="7.27,84.78 855.17,84.78 855.17,4.79 84.74,4.79 " />
-				                        </svg>
-                    </span>
-                </h1>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="container pt-4 pb-5 my-5">
-    <div class="row">
-        <div class="col-lg-12 mb-5 mb-lg-0 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1600">
-
-            <article>
-                <div class="card border-0">
-                    <div class="card-body z-index-1 p-0">
-
-                        <div class="post-image pb-4">
-                            <img class="card-img-top custom-border-radius-1" src="@data.ImageUrl" alt="Card Image">
-                        </div>
-
-                        <div class="card-body p-0">
-                            <h1>@data.Title</h1>
+<div class="site_wrapper">
+    <div class="main_wrapper">
+            <div class="content_wrapper">
+                <div class="container">
+                    <div class="card spc-card">
+                        <div class="card-body">
+                            <h1 class="card-title">@data.Title</h1>
+                            <hr />
                             @Html.Raw(data.Content)
-                            <hr class="my-5">
-
+                        </div>
                         </div>
                     </div>
-                </div>
-            </article>
-
-        </div>
-       
+            </div>
     </div>
 </div>

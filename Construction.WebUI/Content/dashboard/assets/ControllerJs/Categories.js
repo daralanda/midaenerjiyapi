@@ -62,6 +62,9 @@ function PageLoad() {
                             {
                                 return "Hizmetler Kategorisi";
                             }
+                            else if (x == 4) {
+                                return "Hizmet Detay";
+                            }
                             else {
                                 return "Yazı Haber Kategorisi";
                             }
@@ -132,7 +135,7 @@ function Find(id) {
                 document.getElementById("MainCategoryId").value = data.data.MainCategoryId;
                 document.getElementById("CategoryType").value = data.data.CategoryType;
                 document.getElementById("Queno").value = data.data.Queno;
-                newFile = data.data.ImgUrl;
+                newFile = data.data.ImageUrl;
                 document.getElementById("SilinecekResimler").innerHTML = '<img src="' + data.data.ImageUrl + '" class="' + data.data.ImageUrl + '" width="80" height="auto"/> <a onclick="DeleteSingleFile(this)" id="' + data.data.ImageUrl + '" > Sil </a>';
             }
         }

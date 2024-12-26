@@ -113,6 +113,8 @@ namespace Construction.WebUI.Controllers.Api
                         var sub = db.UrlRecords.Where(p => p.CategoryId == item.CategoryId).ToList();
                         lists.AddRange(sub);
                     }
+                    var galleries = db.Galleries.Where(p => p.CategoryId == category.CategoryId).ToList();
+                    db.Galleries.RemoveRange(galleries);
                     db.UrlRecords.RemoveRange(lists);
                     db.Categories.RemoveRange(main);
                     db.SaveChanges();

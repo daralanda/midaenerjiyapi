@@ -9,35 +9,41 @@
     ViewBag.MetaKeywords = data.Keywords;
     ViewBag.MetaDescription = data.Description;
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    var models = mainCode.GetPageList();
 }
-@Html.Raw(mainCode.GetBreadcrumb())
 
-
-<div class="container">
-    <div class="page-header page-header-big text-center" style="  background-image: url('@data.ImageUrl')">
-        <div class="page-title-shadow"><h1 class="page-title text-white">@data.Title</h1></div>
-    </div>
-</div>
-<div class="page-content pb-5">
-    <div class="container">
-        <div class="entry-container max-col-3" data-layout="fitRows">
-
-            @foreach (var item in mainCode.GetPageList())
-            {
-                <div class="entry-item lifestyle shopping col-sm-6 col-lg-4">
-                    <article class="entry entry-grid text-center">
-                        <figure class="entry-media"><a href="@item.SeoUrl"><img src="@item.ImageUrl" alt="@item.Title"></a></figure>
-                        <div class="entry-body">
-                            <h2 class="entry-title"><a href="@item.SeoUrl">@item.Title</a></h2>
-                            <div class="entry-content">
-                                <p>@item.Content</p>
+<div class="site_wrapper">
+    <div class="main_wrapper">
+        <div class="content_wrapper">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in models)
+                    {
+                        <div class="col-md-6">
+                            <div class="blog_post_preview preview_type2">
+                                <div class="blog_content">
+                                    <div class="preview_top">
+                                        <div class="preview_title">
+                                            <h4 class="blogpost_title"><a href="@item.SeoUrl">@item.Title</a></h4>
+                                        </div>
+                                    </div>
+                                    <div class="pf_output_container">
+                                        <div class="slider-wrapper theme-default ">
+                                            <div class="nivoSlider">
+                                                <a href="@item.SeoUrl"> <img src="@item.ImageUrl" alt="@item.Title" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <article class="contentarea">
+                                        @Html.Raw(item.Content)
+                                        <br class="clear">
+                                    </article>
+                                </div>
                             </div>
                         </div>
-                    </article>
+                    }
                 </div>
-            }
-
+            </div>
         </div>
     </div>
 </div>

@@ -53,13 +53,20 @@ function PageLoad() {
                         "data": "CategoryType",
                         render: function (x) {
                             if (x == 1) {
-                                return "Yazı Haber Kategorisi";
+                                return "Normal Kategorisi";
                             }
                             else if (x==2) {
-                                return "Galeri Kategorisi";
+                                return "Proje Kategorisi";
+                            }
+                            else if(x==3)
+                            {
+                                return "Hizmetler Kategorisi";
+                            }
+                            else if (x == 4) {
+                                return "Hizmet Detay";
                             }
                             else {
-                                return "Normal Kategorisi";
+                                return "Yazı Haber Kategorisi";
                             }
                         }
                     },
@@ -128,7 +135,7 @@ function Find(id) {
                 document.getElementById("MainCategoryId").value = data.data.MainCategoryId;
                 document.getElementById("CategoryType").value = data.data.CategoryType;
                 document.getElementById("Queno").value = data.data.Queno;
-                newFile = data.data.ImgUrl;
+                newFile = data.data.ImageUrl;
                 document.getElementById("SilinecekResimler").innerHTML = '<img src="' + data.data.ImageUrl + '" class="' + data.data.ImageUrl + '" width="80" height="auto"/> <a onclick="DeleteSingleFile(this)" id="' + data.data.ImageUrl + '" > Sil </a>';
             }
         }

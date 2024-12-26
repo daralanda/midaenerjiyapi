@@ -9,23 +9,26 @@
     ViewBag.MetaKeywords = data.Keywords;
     ViewBag.MetaDescription = data.Description;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var bred = mainCode.GetBreadcrumb();
 }
 
-@Html.Raw(mainCode.GetBreadcrumb())
-
-
-<div class="container">
-    <div class="page-header page-header-big text-center" style="  background-image: url('@data.ImageUrl')">
-        <div class="page-title-shadow"><h1 class="page-title text-white">@data.Title</h1></div>
-    </div>
+<div class="breadcrumb-spc">
+    @Html.Raw(bred)
+    <img src="@data.ImageUrl" class="breadcrumb-spc-img" />
 </div>
-<div class="page-content pb-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 mb-3 mb-lg-0">
-                <h2 class="title">@data.Title</h2><!-- End .title -->
-                @Html.Raw(data.Content)
+
+<div class="site_wrapper">
+    <div class="main_wrapper">
+            <div class="content_wrapper">
+                <div class="container">
+                    <div class="card spc-card">
+                        <div class="card-body">
+                            <h1 class="card-title">@data.Title</h1>
+                            <hr />
+                            @Html.Raw(data.Content)
+                        </div>
+                        </div>
+                    </div>
             </div>
-        </div>
     </div>
 </div>

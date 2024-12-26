@@ -11,7 +11,7 @@ var categories = {
     ImageUrl: "",
     MainCategoryId: 0,
     Queno: 0,
-    CategoryType: 0,
+    CategoryType: 6,
     IsBlog: true
 }
 $(document).ready(function () {
